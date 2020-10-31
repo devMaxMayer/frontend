@@ -46,6 +46,11 @@ public class AuthenticationRestController {
         this.userService = userService;
     }
 
+    @PostMapping("registration")
+    public void registration(@RequestBody AuthenticationRequestDto requestDto, final HttpServletResponse response) {
+
+    }
+
     @PostMapping("login")
     public void login(@RequestBody AuthenticationRequestDto requestDto, final HttpServletResponse response) {
         try {
@@ -70,7 +75,7 @@ public class AuthenticationRestController {
     }
 
     @GetMapping("user")
-    public Object user() {
+    public JwtUser user() {
         return userService.currentUser();
     }
 
