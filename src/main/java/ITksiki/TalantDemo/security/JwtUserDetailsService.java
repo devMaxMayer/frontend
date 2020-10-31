@@ -1,9 +1,9 @@
-package com.company.tourService.security;
+package ITksiki.TalantDemo.security;
 
-import com.company.tourService.model.User;
-import com.company.tourService.security.jwt.JwtUser;
-import com.company.tourService.security.jwt.JwtUserFactory;
-import com.company.tourService.service.UserService;
+import ITksiki.TalantDemo.entity.User;
+import ITksiki.TalantDemo.security.jwt.JwtUser;
+import ITksiki.TalantDemo.security.jwt.JwtUserFactory;
+import ITksiki.TalantDemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +24,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
+        User user = userService.findByName(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User with username: " + username + " not found");

@@ -17,8 +17,8 @@ import java.sql.Date;
 public class UserTest extends BaseEntity {
     private Date dateStart;
     private Date dateFinish;
-    private User userByIdUser;
-    private Test testByIdTest;
+    private User user;
+    private Test test;
 
     @Basic
     @Column(name = "date_start")
@@ -42,21 +42,21 @@ public class UserTest extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    public User getUserByIdUser() {
-        return userByIdUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByIdUser(User userByIdUser) {
-        this.userByIdUser = userByIdUser;
+    public void setUser(User userByIdUser) {
+        this.user = userByIdUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_test", referencedColumnName = "id", nullable = false)
-    public Test getTestByIdTest() {
-        return testByIdTest;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTestByIdTest(Test testByIdTest) {
-        this.testByIdTest = testByIdTest;
+    public void setTest(Test testByIdTest) {
+        this.test = testByIdTest;
     }
 }

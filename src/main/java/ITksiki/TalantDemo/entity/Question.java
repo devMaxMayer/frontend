@@ -18,9 +18,9 @@ public class Question extends BaseEntity {
     private long order;
     private String text;
     private Long cost;
-    private Collection<Answer> answersById;
-    private Test testByIdTest;
-    private Collection<UserQuestion> userQuestionsById;
+    private Test test;
+    private Collection<Answer> answers;
+    private Collection<UserQuestion> userQuestions;
 
     @Basic
     @Column(name = "name")
@@ -62,31 +62,31 @@ public class Question extends BaseEntity {
         this.cost = cost;
     }
 
-    @OneToMany(mappedBy = "questionByIdQuestion")
-    public Collection<Answer> getAnswersById() {
-        return answersById;
+    @OneToMany(mappedBy = "question")
+    public Collection<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswersById(Collection<Answer> answersById) {
-        this.answersById = answersById;
+    public void setAnswers(Collection<Answer> answersById) {
+        this.answers = answersById;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_test", referencedColumnName = "id", nullable = false)
-    public Test getTestByIdTest() {
-        return testByIdTest;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTestByIdTest(Test testByIdTest) {
-        this.testByIdTest = testByIdTest;
+    public void setTest(Test testByIdTest) {
+        this.test = testByIdTest;
     }
 
-    @OneToMany(mappedBy = "questionByIdQuestion")
-    public Collection<UserQuestion> getUserQuestionsById() {
-        return userQuestionsById;
+    @OneToMany(mappedBy = "question")
+    public Collection<UserQuestion> getUserQuestions() {
+        return userQuestions;
     }
 
-    public void setUserQuestionsById(Collection<UserQuestion> userQuestionsById) {
-        this.userQuestionsById = userQuestionsById;
+    public void setUserQuestions(Collection<UserQuestion> userQuestionsById) {
+        this.userQuestions = userQuestionsById;
     }
 }

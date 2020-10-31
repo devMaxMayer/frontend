@@ -16,8 +16,8 @@ import java.util.Collection;
 public class Test extends BaseEntity {
     private String name;
     private String description;
-    private Collection<Question> questionsById;
-    private Collection<UserTest> userTestsById;
+    private Collection<Question> questions;
+    private Collection<UserTest> userTests;
 
     @Basic
     @Column(name = "name")
@@ -39,21 +39,21 @@ public class Test extends BaseEntity {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "testByIdTest")
-    public Collection<Question> getQuestionsById() {
-        return questionsById;
+    @OneToMany(mappedBy = "test")
+    public Collection<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionsById(Collection<Question> questionsById) {
-        this.questionsById = questionsById;
+    public void setQuestions(Collection<Question> questionsById) {
+        this.questions = questionsById;
     }
 
-    @OneToMany(mappedBy = "testByIdTest")
-    public Collection<UserTest> getUserTestsById() {
-        return userTestsById;
+    @OneToMany(mappedBy = "test")
+    public Collection<UserTest> getUserTests() {
+        return userTests;
     }
 
-    public void setUserTestsById(Collection<UserTest> userTestsById) {
-        this.userTestsById = userTestsById;
+    public void setUserTests(Collection<UserTest> userTestsById) {
+        this.userTests = userTestsById;
     }
 }

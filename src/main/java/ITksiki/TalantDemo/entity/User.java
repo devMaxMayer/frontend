@@ -1,13 +1,16 @@
 package ITksiki.TalantDemo.entity;
 
+import ITksiki.TalantDemo.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -23,14 +26,14 @@ public class User extends BaseEntity {
     private String password;
     private Timestamp created;
     private Timestamp update;
-    private String status;
-    private Collection<ChatRoom> chatRoomsById;
-    private Collection<ChatRoomUser> chatRoomUsersById;
-    private Collection<Message> messagesById;
-    private Collection<UserEvent> userEventsById;
-    private Collection<UserQuestion> userQuestionsById;
-    private Collection<UserRole> userRolesById;
-    private Collection<UserTest> userTestsById;
+    private Status status;
+    private Collection<ChatRoom> chatRooms;
+    private Collection<ChatRoomUser> chatRoomUsers;
+    private Collection<Message> messages;
+    private Collection<UserEvent> userEvents;
+    private Collection<UserQuestion> userQuestions;
+    private Collection<UserRole> userRoles;
+    private Collection<UserTest> userTests;
 
     @Basic
     @Column(name = "name")
@@ -114,7 +117,8 @@ public class User extends BaseEntity {
 
     @Basic
     @Column(name = "status")
-    public String getStatus() {
+    @Enumerated(EnumType.STRING)
+    public Status getStatus() {
         return status;
     }
 
@@ -122,66 +126,74 @@ public class User extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "userByIdCreatorUser")
-    public Collection<ChatRoom> getChatRoomsById() {
-        return chatRoomsById;
+    @OneToMany(mappedBy = "user")
+    public Collection<ChatRoom> getChatRooms() {
+        return chatRooms;
     }
 
-    public void setChatRoomsById(Collection<ChatRoom> chatRoomsById) {
-        this.chatRoomsById = chatRoomsById;
+    public void setChatRooms(Collection<ChatRoom> chatRoomsById) {
+        this.chatRooms = chatRoomsById;
     }
 
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<ChatRoomUser> getChatRoomUsersById() {
-        return chatRoomUsersById;
+    @OneToMany(mappedBy = "user")
+    public Collection<ChatRoomUser> getChatRoomUsers() {
+        return chatRoomUsers;
     }
 
-    public void setChatRoomUsersById(Collection<ChatRoomUser> chatRoomUsersById) {
-        this.chatRoomUsersById = chatRoomUsersById;
+    public void setChatRoomUsers(Collection<ChatRoomUser> chatRoomUsersById) {
+        this.chatRoomUsers = chatRoomUsersById;
     }
 
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<Message> getMessagesById() {
-        return messagesById;
+    @OneToMany(mappedBy = "user")
+    public Collection<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessagesById(Collection<Message> messagesById) {
-        this.messagesById = messagesById;
+    public void setMessages(Collection<Message> messagesById) {
+        this.messages = messagesById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<UserEvent> getUserEventsById() {
-        return userEventsById;
+    @OneToMany(mappedBy = "user")
+    public Collection<UserEvent> getUserEvents() {
+        return userEvents;
     }
 
-    public void setUserEventsById(Collection<UserEvent> userEventsById) {
-        this.userEventsById = userEventsById;
+    public void setUserEvents(Collection<UserEvent> userEventsById) {
+        this.userEvents = userEventsById;
     }
 
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<UserQuestion> getUserQuestionsById() {
-        return userQuestionsById;
+    @OneToMany(mappedBy = "user")
+    public Collection<UserQuestion> getUserQuestions() {
+        return userQuestions;
     }
 
-    public void setUserQuestionsById(Collection<UserQuestion> userQuestionsById) {
-        this.userQuestionsById = userQuestionsById;
+    public void setUserQuestions(Collection<UserQuestion> userQuestionsById) {
+        this.userQuestions = userQuestionsById;
     }
 
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<UserRole> getUserRolesById() {
-        return userRolesById;
+    @OneToMany(mappedBy = "user")
+    public Collection<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRolesById(Collection<UserRole> userRolesById) {
-        this.userRolesById = userRolesById;
+    public void setUserRoles(Collection<UserRole> userRolesById) {
+        this.userRoles = userRolesById;
     }
 
-    @OneToMany(mappedBy = "userByIdUser")
-    public Collection<UserTest> getUserTestsById() {
-        return userTestsById;
+    @OneToMany(mappedBy = "user")
+    public Collection<UserTest> getUserTests() {
+        return userTests;
     }
 
-    public void setUserTestsById(Collection<UserTest> userTestsById) {
-        this.userTestsById = userTestsById;
+    public void setUserTests(Collection<UserTest> userTestsById) {
+        this.userTests = userTestsById;
+    }
+
+    @Transient
+    public Collection<Role> getRoles (){
+        if (CollectionUtils.isEmpty(userRoles)) {
+            return CollectionUtils.emptyCollection();
+        }
+        return userRoles.stream().map(ur -> ur.getRole()).collect(Collectors.toList());
     }
 }

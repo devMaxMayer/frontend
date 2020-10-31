@@ -16,8 +16,8 @@ import java.util.Collection;
 public class Event extends BaseEntity {
     private String name;
     private String status;
-    private EventType eventTypeByIdEventType;
-    private Collection<UserEvent> userEventsById;
+    private EventType eventType;
+    private Collection<UserEvent> userEvents;
 
     @Basic
     @Column(name = "name")
@@ -41,20 +41,20 @@ public class Event extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_event_type", referencedColumnName = "id", nullable = false)
-    public EventType getEventTypeByIdEventType() {
-        return eventTypeByIdEventType;
+    public EventType getEventType() {
+        return eventType;
     }
 
-    public void setEventTypeByIdEventType(EventType eventTypeByIdEventType) {
-        this.eventTypeByIdEventType = eventTypeByIdEventType;
+    public void setEventType(EventType eventTypeByIdEventType) {
+        this.eventType = eventTypeByIdEventType;
     }
 
-    @OneToMany(mappedBy = "eventByEventId")
-    public Collection<UserEvent> getUserEventsById() {
-        return userEventsById;
+    @OneToMany(mappedBy = "event")
+    public Collection<UserEvent> getUserEvents() {
+        return userEvents;
     }
 
-    public void setUserEventsById(Collection<UserEvent> userEventsById) {
-        this.userEventsById = userEventsById;
+    public void setUserEvents(Collection<UserEvent> userEventsById) {
+        this.userEvents = userEventsById;
     }
 }

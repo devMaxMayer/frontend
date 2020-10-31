@@ -16,7 +16,7 @@ import java.util.Collection;
 @Table(name = "event_type", schema = "public", catalog = "talant")
 public class EventType extends BaseEntity {
     private String name;
-    private Collection<Event> eventsById;
+    private Collection<Event> events;
 
     @Basic
     @Column(name = "name")
@@ -28,12 +28,12 @@ public class EventType extends BaseEntity {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "eventTypeByIdEventType")
-    public Collection<Event> getEventsById() {
-        return eventsById;
+    @OneToMany(mappedBy = "eventType")
+    public Collection<Event> getEvents() {
+        return events;
     }
 
-    public void setEventsById(Collection<Event> eventsById) {
-        this.eventsById = eventsById;
+    public void setEvents(Collection<Event> eventsById) {
+        this.events = eventsById;
     }
 }

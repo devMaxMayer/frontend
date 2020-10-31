@@ -15,46 +15,46 @@ import java.util.Collection;
 @Entity
 @Table(name = "chat_room", schema = "public", catalog = "talant")
 public class ChatRoom extends BaseEntity {
-    private User userByIdCreatorUser;
-    private ChatRoomType chatRoomTypeByIdChatRoomType;
-    private Collection<ChatRoomUser> chatRoomUsersById;
-    private Collection<Message> messagesById;
+    private User user;
+    private ChatRoomType chatRoomType;
+    private Collection<ChatRoomUser> chatRoomUsers;
+    private Collection<Message> messages;
 
     @ManyToOne
     @JoinColumn(name = "id_creator_user", referencedColumnName = "id", nullable = false)
-    public User getUserByIdCreatorUser() {
-        return userByIdCreatorUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByIdCreatorUser(User userByIdCreatorUser) {
-        this.userByIdCreatorUser = userByIdCreatorUser;
+    public void setUser(User userByIdCreatorUser) {
+        this.user = userByIdCreatorUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_chat_room_type", referencedColumnName = "id", nullable = false)
-    public ChatRoomType getChatRoomTypeByIdChatRoomType() {
-        return chatRoomTypeByIdChatRoomType;
+    public ChatRoomType getChatRoomType() {
+        return chatRoomType;
     }
 
-    public void setChatRoomTypeByIdChatRoomType(ChatRoomType chatRoomTypeByIdChatRoomType) {
-        this.chatRoomTypeByIdChatRoomType = chatRoomTypeByIdChatRoomType;
+    public void setChatRoomType(ChatRoomType chatRoomTypeByIdChatRoomType) {
+        this.chatRoomType = chatRoomTypeByIdChatRoomType;
     }
 
-    @OneToMany(mappedBy = "chatRoomByIdChatRoom")
-    public Collection<ChatRoomUser> getChatRoomUsersById() {
-        return chatRoomUsersById;
+    @OneToMany(mappedBy = "chatRoom")
+    public Collection<ChatRoomUser> getChatRoomUsers() {
+        return chatRoomUsers;
     }
 
-    public void setChatRoomUsersById(Collection<ChatRoomUser> chatRoomUsersById) {
-        this.chatRoomUsersById = chatRoomUsersById;
+    public void setChatRoomUsers(Collection<ChatRoomUser> chatRoomUsersById) {
+        this.chatRoomUsers = chatRoomUsersById;
     }
 
-    @OneToMany(mappedBy = "chatRoomByIdChatRoom")
-    public Collection<Message> getMessagesById() {
-        return messagesById;
+    @OneToMany(mappedBy = "chatRoom")
+    public Collection<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessagesById(Collection<Message> messagesById) {
-        this.messagesById = messagesById;
+    public void setMessages(Collection<Message> messagesById) {
+        this.messages = messagesById;
     }
 }

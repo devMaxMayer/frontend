@@ -18,18 +18,16 @@ import java.util.Comparator;
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
+    protected Long id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    protected Long id;
-
-
-
-    public Long getName() {
+    public Long getId() {
         return id;
     }
 
-    public void setName(String name) {
+    public void setId(Long id) {
         this.id = id;
     }
 

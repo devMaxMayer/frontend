@@ -14,26 +14,31 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_role", schema = "public", catalog = "talant")
 public class UserRole extends BaseEntity {
-    private User userByIdUser;
-    private Role roleByIdRole;
+    public UserRole(User user, Role role) {
+        this.user = user;
+        this.role = role;
+    }
+
+    private User user;
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    public User getUserByIdUser() {
-        return userByIdUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByIdUser(User userByIdUser) {
-        this.userByIdUser = userByIdUser;
+    public void setUser(User userByIdUser) {
+        this.user = userByIdUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
-    public Role getRoleByIdRole() {
-        return roleByIdRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleByIdRole(Role roleByIdRole) {
-        this.roleByIdRole = roleByIdRole;
+    public void setRole(Role roleByIdRole) {
+        this.role = roleByIdRole;
     }
 }

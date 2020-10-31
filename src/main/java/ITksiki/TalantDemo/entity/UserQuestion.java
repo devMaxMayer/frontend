@@ -17,9 +17,9 @@ import java.sql.Date;
 public class UserQuestion extends BaseEntity {
     private Date dateStart;
     private Date dateFinish;
-    private User userByIdUser;
-    private Question questionByIdQuestion;
-    private Answer answerByIdAnswer;
+    private User user;
+    private Question question;
+    private Answer answer;
 
     @Basic
     @Column(name = "date_start")
@@ -43,31 +43,31 @@ public class UserQuestion extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    public User getUserByIdUser() {
-        return userByIdUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByIdUser(User userByIdUser) {
-        this.userByIdUser = userByIdUser;
+    public void setUser(User userByIdUser) {
+        this.user = userByIdUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_question", referencedColumnName = "id", nullable = false)
-    public Question getQuestionByIdQuestion() {
-        return questionByIdQuestion;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionByIdQuestion(Question questionByIdQuestion) {
-        this.questionByIdQuestion = questionByIdQuestion;
+    public void setQuestion(Question questionByIdQuestion) {
+        this.question = questionByIdQuestion;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_answer", referencedColumnName = "id")
-    public Answer getAnswerByIdAnswer() {
-        return answerByIdAnswer;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAnswerByIdAnswer(Answer answerByIdAnswer) {
-        this.answerByIdAnswer = answerByIdAnswer;
+    public void setAnswer(Answer answerByIdAnswer) {
+        this.answer = answerByIdAnswer;
     }
 }

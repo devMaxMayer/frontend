@@ -1,6 +1,7 @@
 package ITksiki.TalantDemo.dto;
 
-import ITksiki.TalantDemo.entity.Status;
+import ITksiki.TalantDemo.entity.User;
+import ITksiki.TalantDemo.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public class AdminUserDto {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setStatus(Status.valueOf(status));
+        user.setStatus(Status.ACTIVE);
         return user;
     }
 

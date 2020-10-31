@@ -1,5 +1,6 @@
 package ITksiki.TalantDemo.dto;
 
+import ITksiki.TalantDemo.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 

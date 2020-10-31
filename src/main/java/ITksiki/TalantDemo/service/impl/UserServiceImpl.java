@@ -2,17 +2,18 @@ package ITksiki.TalantDemo.service.impl;
 
 
 import ITksiki.TalantDemo.entity.Role;
-import ITksiki.TalantDemo.entity.Status;
 import ITksiki.TalantDemo.entity.User;
+import ITksiki.TalantDemo.entity.UserRole;
+import ITksiki.TalantDemo.enums.Status;
 import ITksiki.TalantDemo.repository.RoleRepository;
 import ITksiki.TalantDemo.repository.UserRepository;
+import ITksiki.TalantDemo.repository.UserRoleRepository;
 import ITksiki.TalantDemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,27 +21,27 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UserRoleRepository userRoleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository,
+                           UserRoleRepository userRoleRepository,
+                           BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User register(User user) {
-        Role roleUser = roleRepository.findByName("ROLE_USER");
-        List<Role> userRoles = new ArrayList<>();
-        userRoles.add(roleUser);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(userRoles);
         user.setStatus(Status.ACTIVE);
-
         User registeredUser = userRepository.save(user);
+
+        UserRole userRole = new UserRole(registeredUser, Role.USER);
+        userRoleRepository.save(userRole);
 
         log.info("IN register - user: {} successfully registered", registeredUser);
 
@@ -75,8 +76,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) {
-        userRepository.deleteById(id);
+    public void disable(Long id) {
+        userRepository.disableById(id, Status.DISABLE);
         log.info("IN delete - user with id: {} successfully deleted");
     }
 }

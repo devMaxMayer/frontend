@@ -14,26 +14,26 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_event", schema = "public", catalog = "talant")
 public class UserEvent extends BaseEntity {
-    private User userByUserId;
-    private Event eventByEventId;
+    private User user;
+    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(User userByUserId) {
+        this.user = userByUserId;
     }
 
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id", nullable = false)
-    public Event getEventByEventId() {
-        return eventByEventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventByEventId(Event eventByEventId) {
-        this.eventByEventId = eventByEventId;
+    public void setEvent(Event eventByEventId) {
+        this.event = eventByEventId;
     }
 }

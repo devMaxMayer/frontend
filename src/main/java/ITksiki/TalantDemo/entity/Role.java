@@ -14,8 +14,17 @@ import java.util.Collection;
 @NoArgsConstructor
 @Entity
 public class Role extends BaseEntity {
+
+    public static final Role USER = new Role(1L, "USER");
+    public static final Role ADMINISTRATOR = new Role(2L, "ADMINISTRATOR");
+
+    public Role(Long id, String name) {
+        super(id);
+        this.name = name;
+    }
+
     private String name;
-    private Collection<UserRole> userRolesById;
+    private Collection<UserRole> userRoles;
 
     @Basic
     @Column(name = "name")
@@ -27,12 +36,12 @@ public class Role extends BaseEntity {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "roleByIdRole")
-    public Collection<UserRole> getUserRolesById() {
-        return userRolesById;
+    @OneToMany(mappedBy = "role")
+    public Collection<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRolesById(Collection<UserRole> userRolesById) {
-        this.userRolesById = userRolesById;
+    public void setUserRoles(Collection<UserRole> userRolesById) {
+        this.userRoles = userRolesById;
     }
 }

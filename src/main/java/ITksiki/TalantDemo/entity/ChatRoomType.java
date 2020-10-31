@@ -16,7 +16,6 @@ import java.util.Collection;
 @Table(name = "chat_room_type", schema = "public", catalog = "talant")
 public class ChatRoomType extends BaseEntity {
     private String name;
-    private Collection<ChatRoom> chatRoomsById;
 
     @Basic
     @Column(name = "name")
@@ -26,15 +25,5 @@ public class ChatRoomType extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-
-    @OneToMany(mappedBy = "chatRoomTypeByIdChatRoomType")
-    public Collection<ChatRoom> getChatRoomsById() {
-        return chatRoomsById;
-    }
-
-    public void setChatRoomsById(Collection<ChatRoom> chatRoomsById) {
-        this.chatRoomsById = chatRoomsById;
     }
 }

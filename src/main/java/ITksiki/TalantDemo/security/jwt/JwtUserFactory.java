@@ -1,7 +1,8 @@
 package ITksiki.TalantDemo.security.jwt;
 
-import ITksiki.TalantDemo.entity.Status;
+import ITksiki.TalantDemo.entity.Role;
 import ITksiki.TalantDemo.entity.User;
+import ITksiki.TalantDemo.enums.Status;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -22,13 +23,13 @@ public final class JwtUserFactory {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                mapToGrantedAuthorities(new Collection<Object>(user.getRoles())),
+                mapToGrantedAuthorities(user.getRoles()),
                 user.getStatus().equals(Status.ACTIVE),
                 user.getUpdate()
         );
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<Role> userRoles) {
         return userRoles.stream()
                 .map(role ->
                         new SimpleGrantedAuthority(role.getName())

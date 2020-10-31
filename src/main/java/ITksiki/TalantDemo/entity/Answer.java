@@ -17,8 +17,8 @@ import java.util.Collection;
 public class Answer extends BaseEntity {
     private String name;
     private boolean correct;
-    private Question questionByIdQuestion;
-    private Collection<UserQuestion> userQuestionsById;
+    private Question question;
+    private Collection<UserQuestion> userQuestions;
 
 
     @Basic
@@ -43,20 +43,20 @@ public class Answer extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_question", referencedColumnName = "id", nullable = false)
-    public Question getQuestionByIdQuestion() {
-        return questionByIdQuestion;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionByIdQuestion(Question questionByIdQuestion) {
-        this.questionByIdQuestion = questionByIdQuestion;
+    public void setQuestion(Question questionByIdQuestion) {
+        this.question = questionByIdQuestion;
     }
 
-    @OneToMany(mappedBy = "answerByIdAnswer")
-    public Collection<UserQuestion> getUserQuestionsById() {
-        return userQuestionsById;
+    @OneToMany(mappedBy = "answer")
+    public Collection<UserQuestion> getUserQuestions() {
+        return userQuestions;
     }
 
-    public void setUserQuestionsById(Collection<UserQuestion> userQuestionsById) {
-        this.userQuestionsById = userQuestionsById;
+    public void setUserQuestions(Collection<UserQuestion> userQuestionsById) {
+        this.userQuestions = userQuestionsById;
     }
 }

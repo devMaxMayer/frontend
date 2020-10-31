@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Entity
 public class Message extends BaseEntity {
     private String message;
-    private User userByIdUser;
-    private ChatRoom chatRoomByIdChatRoom;
+    private User user;
+    private ChatRoom chatRoom;
 
     @Basic
     @Column(name = "message")
@@ -29,21 +29,21 @@ public class Message extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    public User getUserByIdUser() {
-        return userByIdUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByIdUser(User userByIdUser) {
-        this.userByIdUser = userByIdUser;
+    public void setUser(User userByIdUser) {
+        this.user = userByIdUser;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_chat_room", referencedColumnName = "id", nullable = false)
-    public ChatRoom getChatRoomByIdChatRoom() {
-        return chatRoomByIdChatRoom;
+    public ChatRoom getChatRoom() {
+        return chatRoom;
     }
 
-    public void setChatRoomByIdChatRoom(ChatRoom chatRoomByIdChatRoom) {
-        this.chatRoomByIdChatRoom = chatRoomByIdChatRoom;
+    public void setChatRoom(ChatRoom chatRoomByIdChatRoom) {
+        this.chatRoom = chatRoomByIdChatRoom;
     }
 }
