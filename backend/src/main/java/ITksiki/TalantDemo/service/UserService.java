@@ -1,9 +1,8 @@
 package ITksiki.TalantDemo.service;
 
-
-
 import ITksiki.TalantDemo.entity.User;
 import ITksiki.TalantDemo.security.jwt.JwtUser;
+
 
 import java.util.List;
 

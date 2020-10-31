@@ -113,7 +113,7 @@ public class User extends BaseEntity {
     @Basic
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    public ITksiki.TalantDemo.enums.Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
