@@ -68,11 +68,12 @@ public class AuthenticationRestController {
         }
     }
 
+    /**
+     * кодирует пароль, который необходимо проставить пользователю в БД
+     */
     public static void main(String[] args) {
         BCryptPasswordEncoder we = new BCryptPasswordEncoder();
         String encode = we.encode("1234");
         System.out.println(encode);
-
-
     }
 }
