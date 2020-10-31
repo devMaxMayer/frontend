@@ -5,6 +5,7 @@ import ITksiki.TalantDemo.entity.Role;
 import ITksiki.TalantDemo.entity.User;
 import ITksiki.TalantDemo.entity.UserRole;
 import ITksiki.TalantDemo.enums.Status;
+import ITksiki.TalantDemo.repository.RoleRepository;
 import ITksiki.TalantDemo.repository.UserRepository;
 import ITksiki.TalantDemo.repository.UserRoleRepository;
 import ITksiki.TalantDemo.security.jwt.JwtUser;
