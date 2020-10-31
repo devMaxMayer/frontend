@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(name = "user", schema = "public", catalog = "talant")
 public class User extends BaseEntity {
     private String name;
     private String firstName;

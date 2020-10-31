@@ -13,6 +13,7 @@ import java.util.Collection;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(name = "question", schema = "public", catalog = "talant")
 public class Question extends BaseEntity {
     private String name;
     private long order;

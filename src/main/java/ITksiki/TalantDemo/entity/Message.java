@@ -12,6 +12,7 @@ import javax.persistence.*;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(name = "message", schema = "public", catalog = "talant")
 public class Message extends BaseEntity {
     private String message;
     private User user;

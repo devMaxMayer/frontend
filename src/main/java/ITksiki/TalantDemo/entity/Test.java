@@ -13,6 +13,7 @@ import java.util.Collection;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(name = "test", schema = "public", catalog = "talant")
 public class Test extends BaseEntity {
     private String name;
     private String description;

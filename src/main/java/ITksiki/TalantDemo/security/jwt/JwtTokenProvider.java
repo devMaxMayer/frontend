@@ -102,4 +102,8 @@ public class JwtTokenProvider {
 
         return result;
     }
+
+    public long getValidityInMilliseconds() {
+        return validityInMilliseconds;
+    }
 }

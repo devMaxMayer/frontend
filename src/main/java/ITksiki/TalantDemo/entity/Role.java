@@ -13,6 +13,7 @@ import java.util.Collection;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(name = "role", schema = "public", catalog = "talant")
 public class Role extends BaseEntity {
 
     public static final Role USER = new Role(1L, "USER");

@@ -4,6 +4,7 @@ import ITksiki.TalantDemo.dto.AuthenticationRequestDto;
 import ITksiki.TalantDemo.entity.User;
 import ITksiki.TalantDemo.security.jwt.JwtTokenProvider;
 import ITksiki.TalantDemo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,18 +13,25 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/auth/")
 public class AuthenticationRestController {
 
+    public static final String ACCESS_TOKEN_COOKIE_NAME = "token";
     private final AuthenticationManager authenticationManager;
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -38,7 +46,7 @@ public class AuthenticationRestController {
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+    public void login(@RequestBody AuthenticationRequestDto requestDto, final HttpServletResponse response) {
         try {
             String username = requestDto.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
@@ -49,14 +57,22 @@ public class AuthenticationRestController {
             }
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
-
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
-            response.put("token", token);
-
-            return ResponseEntity.ok(response);
+            final Cookie cookie = new Cookie(ACCESS_TOKEN_COOKIE_NAME, token);
+            cookie.setMaxAge((int) jwtTokenProvider.getValidityInMilliseconds());
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.addCookie(cookie);
         } catch (AuthenticationException e) {
+            log.error("", e);
             throw new BadCredentialsException("Invalid username or password");
         }
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder we = new BCryptPasswordEncoder();
+        String encode = we.encode("1234");
+        System.out.println(encode);
+
+
     }
 }
