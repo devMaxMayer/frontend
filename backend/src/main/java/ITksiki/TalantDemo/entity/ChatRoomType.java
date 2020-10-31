@@ -14,6 +14,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "chat_room_type", schema = "public", catalog = "talant")
 public class ChatRoomType extends BaseEntity {
+
+    public static final ChatRoomType PERSONAL = new ChatRoomType(1L, "PERSONAL");
+    public static final ChatRoomType GROUP = new ChatRoomType(2L, "GROUP");
+
+    public ChatRoomType(Long id, String name) {
+        super(id);
+        this.name = name;
+    }
     private String name;
 
     @Basic

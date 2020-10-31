@@ -19,5 +19,7 @@ public interface UserService {
 
     void disable(Long id);
 
-    JwtUser currentUser();
+    JwtUser currentJwtUser();
+
+    User currentUser();
 }

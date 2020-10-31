@@ -28,13 +28,7 @@ public class User extends BaseEntity {
     private Timestamp created;
     private Timestamp update;
     private Status status;
-    private Collection<ChatRoom> chatRooms;
-    private Collection<ChatRoomUser> chatRoomUsers;
-    private Collection<Message> messages;
-    private Collection<UserEvent> userEvents;
-    private Collection<UserQuestion> userQuestions;
     private Collection<UserRole> userRoles;
-    private Collection<UserTest> userTests;
 
     @Basic
     @Column(name = "name")
@@ -127,51 +121,6 @@ public class User extends BaseEntity {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "user")
-    public Collection<ChatRoom> getChatRooms() {
-        return chatRooms;
-    }
-
-    public void setChatRooms(Collection<ChatRoom> chatRoomsById) {
-        this.chatRooms = chatRoomsById;
-    }
-
-    @OneToMany(mappedBy = "user")
-    public Collection<ChatRoomUser> getChatRoomUsers() {
-        return chatRoomUsers;
-    }
-
-    public void setChatRoomUsers(Collection<ChatRoomUser> chatRoomUsersById) {
-        this.chatRoomUsers = chatRoomUsersById;
-    }
-
-    @OneToMany(mappedBy = "user")
-    public Collection<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Collection<Message> messagesById) {
-        this.messages = messagesById;
-    }
-
-    @OneToMany(mappedBy = "user")
-    public Collection<UserEvent> getUserEvents() {
-        return userEvents;
-    }
-
-    public void setUserEvents(Collection<UserEvent> userEventsById) {
-        this.userEvents = userEventsById;
-    }
-
-    @OneToMany(mappedBy = "user")
-    public Collection<UserQuestion> getUserQuestions() {
-        return userQuestions;
-    }
-
-    public void setUserQuestions(Collection<UserQuestion> userQuestionsById) {
-        this.userQuestions = userQuestionsById;
-    }
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Collection<UserRole> getUserRoles() {
         return userRoles;
@@ -179,15 +128,6 @@ public class User extends BaseEntity {
 
     public void setUserRoles(Collection<UserRole> userRolesById) {
         this.userRoles = userRolesById;
-    }
-
-    @OneToMany(mappedBy = "user")
-    public Collection<UserTest> getUserTests() {
-        return userTests;
-    }
-
-    public void setUserTests(Collection<UserTest> userTestsById) {
-        this.userTests = userTestsById;
     }
 
     @Transient

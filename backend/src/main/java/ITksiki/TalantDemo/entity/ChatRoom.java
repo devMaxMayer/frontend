@@ -15,19 +15,19 @@ import java.util.Collection;
 @Entity
 @Table(name = "chat_room", schema = "public", catalog = "talant")
 public class ChatRoom extends BaseEntity {
-    private User user;
+    private User creatorUser;
     private ChatRoomType chatRoomType;
     private Collection<ChatRoomUser> chatRoomUsers;
     private Collection<Message> messages;
 
     @ManyToOne
     @JoinColumn(name = "id_creator_user", referencedColumnName = "id", nullable = false)
-    public User getUser() {
-        return user;
+    public User getCreatorUser() {
+        return creatorUser;
     }
 
-    public void setUser(User userByIdCreatorUser) {
-        this.user = userByIdCreatorUser;
+    public void setCreatorUser(User userByIdCreatorUser) {
+        this.creatorUser = userByIdCreatorUser;
     }
 
     @ManyToOne

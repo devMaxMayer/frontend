@@ -84,8 +84,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JwtUser currentUser() {
+    public JwtUser currentJwtUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return (JwtUser) auth.getPrincipal();
+    }
+
+    @Override
+    public User currentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = (JwtUser) auth.getPrincipal();
+        return findById(jwtUser.getId());
     }
 }

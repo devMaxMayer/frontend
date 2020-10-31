@@ -1,7 +1,10 @@
 package ITksiki.TalantDemo.controller;
 
+import ITksiki.TalantDemo.dto.BaseDto;
 import ITksiki.TalantDemo.dto.MessageFromUserDto;
+import ITksiki.TalantDemo.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -9,9 +12,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1/chat/")
 public class ChatController {
 
-    @PostMapping("create-chat")
-    public void createСhat(@RequestBody Long idUserWithWhom) {
+    private final ChatService chatService;
 
+    @Autowired
+    public ChatController(ChatService chatService) {
+        this.chatService = chatService;
+    }
+
+    @PostMapping("create-chat")
+    public void createСhat(@RequestBody BaseDto userWithWhom) {
+        chatService.createPersonalChat(userWithWhom.getId());
     }
 
     @GetMapping("my-chats")
