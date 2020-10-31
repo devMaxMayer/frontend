@@ -18,11 +18,20 @@ import java.util.Comparator;
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     protected Long id;
+
+
+
+    public Long getName() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
