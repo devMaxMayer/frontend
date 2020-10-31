@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     private String password;
     private Timestamp created;
     private Timestamp update;
-    private ITksiki.TalantDemo.enums.Status status;
+    private Status status;
     private Collection<ChatRoom> chatRooms;
     private Collection<ChatRoomUser> chatRoomUsers;
     private Collection<Message> messages;
