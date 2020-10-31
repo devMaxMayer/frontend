@@ -7,9 +7,12 @@ import ITksiki.TalantDemo.entity.UserRole;
 import ITksiki.TalantDemo.enums.Status;
 import ITksiki.TalantDemo.repository.UserRepository;
 import ITksiki.TalantDemo.repository.UserRoleRepository;
+import ITksiki.TalantDemo.security.jwt.JwtUser;
 import ITksiki.TalantDemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,5 +81,11 @@ public class UserServiceImpl implements UserService {
     public void disable(Long id) {
         userRepository.disableById(id, Status.DISABLE);
         log.info("IN delete - user with id: {} successfully deleted");
+    }
+
+    @Override
+    public JwtUser currentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return (JwtUser) auth.getPrincipal();
     }
 }

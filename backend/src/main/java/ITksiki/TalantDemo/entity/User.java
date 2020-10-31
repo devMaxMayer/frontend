@@ -172,7 +172,7 @@ public class User extends BaseEntity {
         this.userQuestions = userQuestionsById;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Collection<UserRole> getUserRoles() {
         return userRoles;
     }
